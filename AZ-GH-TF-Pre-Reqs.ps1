@@ -3,16 +3,16 @@
 #Log into Azure
 #az login
 
-# Setup Variables.
-$randomInt = Get-Random -Maximum 9999
+# Setup Variables
+$randomInt = Get-Random -Maximum 999999
 $subscriptionId=$(az account show --query id -o tsv)
-$resourceGroupName = "DevOps-Terraform-Core-Backend-RG"
+$resourceGroupName = "S2-DevOps002-Terraform-Core-Backend-RG"
 $storageName = "tfcorebackends$randomInt"
 $kvName = "tf-core-backend-kv$randomInt"
-$appName="tf-core-azuredevops-SPN$randomInt"
+$appName="tf-core-DevOps002-SPN$randomInt"
 $region = "westeurope"
 
-# Create a resource resourceGroupName
+# Create a Resource Group
 az group create --name "$resourceGroupName" --location "$region"
 
 # Create a Key Vault
