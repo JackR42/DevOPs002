@@ -6,10 +6,10 @@
 # Setup Variables
 $randomInt = Get-Random -Maximum 999999
 $subscriptionId=$(az account show --query id -o tsv)
-$resourceGroupName = "S2-DevOps002-Terraform-Core-Backend-RG"
-$storageName = "tfcorebackends$randomInt"
-$kvName = "tf-core-backend-kv$randomInt"
-$appName="tf-core-DevOps002-SPN$randomInt"
+$resourceGroupName = "S2-Project01-Core-Backend-RG"
+$storageName = "corebackend$randomInt"
+$kvName = "core-backend-kv$randomInt"
+$appName="core-backend-Project01-SPN$randomInt"
 $region = "westeurope"
 
 # Create a Resource Group
