@@ -6,14 +6,16 @@
 # Setup Variables
 $randomInt = Get-Random -Maximum 999999
 $subscriptionId=$(az account show --query id -o tsv)
-$resourceGroupName = "S2-Project01-Core-Backend-RG"
-$storageName = "corebackend$randomInt"
-$kvName = "core-backend-kv$randomInt"
-$appName="core-backend-Project01-SPN$randomInt"
+$ProjectName = "project01"
+$resourceGroupName = "S2-RG-CORE-$ProjectName"
+$storageName = "core$ProjectName$randomInt"
+$kvName = "core-$ProjectName-kv$randomInt"
+$appName="SPN-$ProjectName-$randomInt"
 $region = "westeurope"
 
-# Create a Resource Group
+# Create a resource resourceGroupName
 az group create --name "$resourceGroupName" --location "$region"
+#az group delete --name  "$resourceGroupName" --no-wait --yes
 
 # Create a Key Vault
 az keyvault create `
@@ -23,7 +25,7 @@ az keyvault create `
     --enable-rbac-authorization
 
 # Authorize the operation to create a few secrets - Signed in User (Key Vault Secrets Officer)
-az ad signed-in-user show --query objectId -o tsv | foreach-object {
+az ad signed-in-user show --query id -o tsv | foreach-object {
     az role assignment create `
         --role "Key Vault Secrets Officer" `
         --assignee "$_" `
@@ -41,7 +43,7 @@ az storage account create `
     --min-tls-version "TLS1_2"
 
 # Authorize the operation to create the container - Signed in User (Storage Blob Data Contributor Role)
-az ad signed-in-user show --query objectId -o tsv | foreach-object {
+az ad signed-in-user show --query id -o tsv | foreach-object {
     az role assignment create `
         --role "Storage Blob Data Contributor" `
         --assignee "$_" `
@@ -49,7 +51,7 @@ az ad signed-in-user show --query objectId -o tsv | foreach-object {
     }
 
 #Create Upload container in storage account to store terraform state files
-Start-Sleep -s 40
+Start-Sleep -s 60
 az storage container create `
     --account-name "$storageName" `
     --name "tfstate" `
@@ -85,3 +87,4 @@ az ad sp list --display-name $appName --query [].appId -o tsv | ForEach-Object {
         --role "Storage Blob Data Contributor" `
         --scope "/subscriptions/$subscriptionId/resourceGroups/$resourceGroupName/providers/Microsoft.Storage/storageAccounts/$storageName" `
     }
+    
