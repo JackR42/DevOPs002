@@ -1,16 +1,15 @@
 ## code/AZ-GH-TF-Pre-Reqs.ps1
 ## https://dev.to/pwd9000/multi-environment-azure-deployments-with-terraform-and-github-2450
-
 #Log into Azure
 #az login
 
 # Setup Variables.
 $randomInt = Get-Random -Maximum 9999
 $subscriptionId=$(az account show --query id -o tsv)
-$resourceGroupName = "Demo-Terraform-Core-Backend-RG"
-$storageName = "tfcorebackendsa$randomInt"
+$resourceGroupName = "DevOps-Terraform-Core-Backend-RG"
+$storageName = "tfcorebackends$randomInt"
 $kvName = "tf-core-backend-kv$randomInt"
-$appName="tf-core-github-SPN$randomInt"
+$appName="tf-core-azuredevops-SPN$randomInt"
 $region = "westeurope"
 
 # Create a resource resourceGroupName
