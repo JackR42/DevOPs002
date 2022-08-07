@@ -35,7 +35,7 @@ steps:
     SecretsFilter: '*'
     RunAsPreJob: true
 - task: TerraformTaskV3@3
-  displayName: 'TF_Validate'
+  displayName: 'TF_Plan'
   inputs:
     provider: 'azurerm'
     command: 'plan'
