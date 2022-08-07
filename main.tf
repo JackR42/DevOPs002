@@ -13,15 +13,15 @@ data "azurerm_key_vault" "project" {
 }
 data "azurerm_key_vault_secret" "secret1" {
   name         = "SqlServer-InstanceName"
-  key_vault_id = data.azurerm_key_vault.project42.id
+  key_vault_id = data.azurerm_key_vault.project.id
 }
 data "azurerm_key_vault_secret" "secret2" {
   name         = "SqlServer-InstanceAdminUserName"
-  key_vault_id = data.azurerm_key_vault.project42.id
+  key_vault_id = data.azurerm_key_vault.project.id
 }
 data "azurerm_key_vault_secret" "secret3" {
   name         = "SqlServer-InstanceAdminPassword"
-  key_vault_id = data.azurerm_key_vault.project42.id
+  key_vault_id = data.azurerm_key_vault.project.id
 }
 
 ### END KeyVault
