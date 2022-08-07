@@ -34,3 +34,13 @@ steps:
     KeyVaultName: 'core-project01-kv927432'
     SecretsFilter: '*'
     RunAsPreJob: true
+- task: TerraformTaskV3@3
+  inputs:
+    provider: 'azurerm'
+    command: 'plan'
+    environmentServiceNameAzureRM: 'SPN-project01-927432'
+- task: TerraformTaskV3@3
+  inputs:
+    provider: 'azurerm'
+    command: 'apply'
+    environmentServiceNameAzureRM: 'SPN-project01-927432'
