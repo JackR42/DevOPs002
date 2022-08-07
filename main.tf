@@ -53,3 +53,15 @@ resource "azurerm_mssql_firewall_rule" "project-fw2" {
   start_ip_address = "94.209.108.55"
   end_ip_address = "94.209.108.55"
 }
+resource "azurerm_mssql_database" "project" {
+  name = "${var.database-database1-name}"
+  server_id = azurerm_mssql_server.project.id
+  collation = "SQL_Latin1_General_CP1_CI_AS"
+  max_size_gb = 2
+  sku_name = "GP_S_Gen5_1"
+  zone_redundant = false
+  auto_pause_delay_in_minutes = 60
+  min_capacity = 0.5
+  storage_account_type = "Local"
+# license_type = "LicenseIncluded"
+}
