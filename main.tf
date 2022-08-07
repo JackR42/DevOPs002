@@ -39,3 +39,17 @@ resource "azurerm_mssql_server" "project" {
  administrator_login = data.azurerm_key_vault_secret.secret2.value
  administrator_login_password = data.azurerm_key_vault_secret.secret3.value
 }
+# Create FW rule to allow access from OFFICE
+resource "azurerm_mssql_firewall_rule" "project-fw1" {
+  name = "FirewallRule1"
+  server_id = azurerm_mssql_server.project.id
+  start_ip_address = "91.205.194.1"
+  end_ip_address = "91.205.194.1"
+}
+# Create FW rule to allow access from HOME
+resource "azurerm_mssql_firewall_rule" "project-fw2" {
+  name = "FirewallRule2"
+  server_id = azurerm_mssql_server.project.id
+  start_ip_address = "94.209.108.55"
+  end_ip_address = "94.209.108.55"
+}
