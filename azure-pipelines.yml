@@ -7,7 +7,7 @@ trigger:
 - main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: windows-latest
 
 steps:
 - script: echo Hello, world!
@@ -28,3 +28,10 @@ steps:
     backendAzureRmStorageAccountName: 'coreproject01927432'
     backendAzureRmContainerName: 'tfstate'
     backendAzureRmKey: 'main.tfstate'
+- task: AzureKeyVault@2
+  displayName: 'TF_KeyVault'
+  inputs:
+    azureSubscription: 'SPN-project01-927432'
+    KeyVaultName: 'core-project01-kv927432'
+    SecretsFilter: '*'
+    RunAsPreJob: true
