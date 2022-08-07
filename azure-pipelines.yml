@@ -49,3 +49,14 @@ steps:
     commandOptions: 'tfplan'
     environmentServiceNameAzureRM: 'SPN-project01-927432'
     
+- task: SqlAzureDacpacDeployment@1
+  inputs:
+    azureSubscription: 'SPN-project01-927432'
+    AuthenticationType: 'server'
+    ServerName: '$(SQLServer-InstanceName).database.windows.net'
+    DatabaseName: '$(SQLServer-Database1Name)'
+    SqlUsername: '$(SQLServer-InstanceAdminUserName)'
+    SqlPassword: '$(SQLServer-InstanceAdminPassword)'
+    deployType: 'SqlTask'
+    SqlFile: 'dba01.sql'
+    IpDetectionMethod: 'AutoDetect'
