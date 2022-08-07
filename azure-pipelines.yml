@@ -35,12 +35,15 @@ steps:
     SecretsFilter: '*'
     RunAsPreJob: true
 - task: TerraformTaskV3@3
+  displayName: 'TF_Validate'
   inputs:
     provider: 'azurerm'
     command: 'plan'
     environmentServiceNameAzureRM: 'SPN-project01-927432'
 - task: TerraformTaskV3@3
+  displayName: 'TF_Deploy'
   inputs:
     provider: 'azurerm'
     command: 'apply'
     environmentServiceNameAzureRM: 'SPN-project01-927432'
+    
