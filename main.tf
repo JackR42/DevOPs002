@@ -23,6 +23,10 @@ data "azurerm_key_vault_secret" "secret3" {
   name         = "SqlServer-InstanceAdminPassword"
   key_vault_id = data.azurerm_key_vault.project.id
 }
+data "azurerm_key_vault_secret" "secret4" {
+  name         = "SqlServer-Database1Name"
+  key_vault_id = data.azurerm_key_vault.project.id
+}
 
 ### END KeyVault
 
@@ -54,7 +58,7 @@ resource "azurerm_mssql_firewall_rule" "project-fw2" {
   end_ip_address = "94.209.108.55"
 }
 resource "azurerm_mssql_database" "project" {
-  name = "${var.database-database1-name}"
+  name = data.azurerm_key_vault_secret.secret4.value
   server_id = azurerm_mssql_server.project.id
   collation = "SQL_Latin1_General_CP1_CI_AS"
   max_size_gb = 2
