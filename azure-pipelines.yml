@@ -50,6 +50,7 @@ steps:
     environmentServiceNameAzureRM: 'SPN-project01-927432'
     
 - task: SqlAzureDacpacDeployment@1
+  displayName: 'TF_SQL'
   inputs:
     azureSubscription: 'SPN-project01-927432'
     AuthenticationType: 'server'
